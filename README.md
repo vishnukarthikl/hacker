@@ -35,6 +35,14 @@ GET /hackathon
 ````
 curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfX3YiOjAsIm5hbWUiOiJBQUEiLCJwYXNzd29yZCI6IiQyYSQwOCRKeUNha1JxNFhxYXJnY052M3o0TUIuOWFGNTRNMUJEcUg1SmtYSW84ZDRTMEhoZzcvZkNNLiIsImVtYWlsIjoiYWJjNyIsImlkIjoiNTY0ODQxZDFmODRlODA3NDg3NWQzZDU1IiwiX2lkIjoiNTY0ODQxZDFmODRlODA3NDg3NWQzZDU0IiwiaGFja2F0aG9ucyI6W10sInNraWxscyI6W119.eCfwyZdS5jafUX5p6MKfiU0p91-wj_zWUbQUU4G4SZk" http://localhost:8080/hackathon
 ````
+get hackathon
+-------------
+fetch a particular hackathon by its id along with participants
+GET /hackathon/<id>
+````
+curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfX3YiOjAsInBhc3N3b3JkIjoiJDJhJDA4JGhpR2gvYzZFd3lwczlXTVBrTzJlRk9kNnV1Z2lnbGFhdll0Y2NpODliaDVoazRLdXZ0Rzl1IiwiZW1haWwiOiJhbG9rQHVzYy5lZHUiLCJpZCI6IjU2NDg1MTQ0YmZjZjJmOTc5MDlkMDkwZCIsIl9pZCI6IjU2NDg1MTQ0YmZjZjJmOTc5MDlkMDkwYyIsImNyZWF0ZWRIYWNrYXRob25zIjpbXSwiaGFja2F0aG9ucyI6W10sInNraWxscyI6W119.eKNMDeTELO5dtXYLOTM3AzdV67X70GgcyclDZzpqcuA"  http://localhost:8080/hackathon/564850f0bfcf2f97909d090b
+````
+
 add participant
 ---------------
 POST /add-participant {hackation_id: <id of the hackathon the hacker wants to join}

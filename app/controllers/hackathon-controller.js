@@ -49,7 +49,7 @@ function addParticipant(req, res) {
         if (err || hackathon == null) {
             res.json({
                 type: false,
-                data: "Error occured while fetching hackathon "+hackathon.id
+                data: "Error occured while fetching hackathon " + hackathon.id
             });
         } else {
             User.findOne({token: req.token}, function (err, participant) {
@@ -68,6 +68,16 @@ function addParticipant(req, res) {
     });
 }
 
+function getHackathon(req, res) {
+    Hackathon.findOne({id: mongoose.Types.ObjectId(req.params.id)}).populate('participants').exec(function (err, hackathon) {
+        res.json({
+            type: true,
+            data: hackathon
+        });
+    });
+}
+
 module.exports.createHackathon = createHackathon;
 module.exports.allHackathons = allHackathons;
 module.exports.addParticipant = addParticipant;
+module.exports.getHackathon = getHackathon;
