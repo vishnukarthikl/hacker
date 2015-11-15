@@ -79,6 +79,25 @@ function updateUser(req, res) {
     });
 }
 
+function getUser(req, res) {
+    processUser(req, res, function (user) {
+        User.findOne({id: mongoose.Types.ObjectId(req.params.id)}, function (err, profile) {
+            if (err || profile == null) {
+                res.json({
+                    type: false,
+                    data: "Error occured while fetching hacker " + req.params.id
+                });
+            } else {
+                res.json({
+                    type: true,
+                    data: profile.safeData()
+                });
+            }
+        })
+    });
+}
+
 module.exports.createUser = createUser;
 module.exports.getProfile = getProfile;
 module.exports.updateUser = updateUser;
+module.exports.getUser = getUser;

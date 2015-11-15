@@ -32,6 +32,7 @@ app.post('/authenticate', AuthController.authenticate);
 app.post('/signup', UserController.createUser);
 app.get('/me', AuthController.ensureAuthorized, UserController.getProfile);
 app.post('/user', AuthController.ensureAuthorized, UserController.updateUser);
+app.get('/user/:id', AuthController.ensureAuthorized, UserController.getUser);
 app.put('/hackathon', AuthController.ensureAuthorized, HackathonController.createHackathon);
 app.get('/hackathon', AuthController.ensureAuthorized, HackathonController.allHackathons);
 app.get('/hackathon/:id', AuthController.ensureAuthorized, HackathonController.getHackathon);
