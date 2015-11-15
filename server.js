@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
-var bcrypt = require('bcrypt-nodejs');
 var config = require('./config');
 var User = require('./app/models/user');
 
@@ -110,7 +109,7 @@ app.get('/me', ensureAuthorized, function (req, res) {
         if (err) {
             res.json({
                 type: false,
-                data: "Error occured: " + err
+                data: "Error occurred: " + err
             });
         } else {
             res.json({
