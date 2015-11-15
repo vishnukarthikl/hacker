@@ -23,11 +23,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', function (req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
-});
-
-
 app.listen(port);
 
 var apiRoutes = express.Router();
