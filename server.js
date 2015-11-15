@@ -7,6 +7,7 @@ var config = require('./config');
 var UserController = require('./app/controllers/user-controller');
 var AuthController = require('./app/controllers/auth-controller');
 var HackathonController = require('./app/controllers/hackathon-controller');
+var TeamController = require('./app/controllers/team-controller');
 
 var port = process.env.PORT || 8080;
 var mongodb = process.env.MONGOLAB_URI || config.database;
@@ -35,6 +36,8 @@ app.put('/hackathon', AuthController.ensureAuthorized, HackathonController.creat
 app.get('/hackathon', AuthController.ensureAuthorized, HackathonController.allHackathons);
 app.get('/hackathon/:id', AuthController.ensureAuthorized, HackathonController.getHackathon);
 app.post('/add-participant', AuthController.ensureAuthorized, HackathonController.addParticipant);
+app.put('/team',AuthController.ensureAuthorized, TeamController.createTeam);
+app.post('/add-team-member',AuthController.ensureAuthorized, TeamController.joinTeam);
 apiRoutes.get('/', function (req, res) {
     res.json({message: 'This is where the hackers are'});
 });

@@ -11,7 +11,8 @@ var userSchema = mongoose.Schema({
     skills: {type: Array, "default": []},
     name: String,
     hackathons: [{type: mongoose.Schema.ObjectId, ref: 'Hackathon'}],
-    createdHackathons: [{type: mongoose.Schema.ObjectId, ref: 'Hackathon'}]
+    createdHackathons: [{type: mongoose.Schema.ObjectId, ref: 'Hackathon'}],
+    joinedTeams: [{type: mongoose.Schema.ObjectId, ref: 'Team'}]
 });
 
 userSchema.methods.generateHash = function (password) {
@@ -23,7 +24,16 @@ userSchema.methods.validPassword = function (password) {
 };
 
 userSchema.methods.safeData = function () {
-    return {id: this.id, name: this.name, email: this.email, token: this.token, skills: this.skills}
+    return {
+        id: this.id,
+        name: this.name,
+        email: this.email,
+        token: this.token,
+        skills: this.skills,
+        hackathons: this.hackathons,
+        createdHackathons: this.createdHackathons,
+        joinedTeams: this.joinedTeams
+    };
 };
 
 module.exports = mongoose.model('User', userSchema);
