@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
+var mongoose = require('mongoose');
 
 
 function processUser(req, res, requestProcessor) {
@@ -37,6 +38,7 @@ function createUser(req, res) {
                 });
             } else {
                 var userModel = new User();
+                userModel.id = mongoose.Types.ObjectId();
                 userModel.email = req.body.email;
                 userModel.password = userModel.generateHash(req.body.password);
                 userModel.name = req.body.name;

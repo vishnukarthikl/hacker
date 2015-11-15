@@ -4,11 +4,14 @@ var Schema = mongoose.Schema;
 
 // set up a mongoose model and pass it using module.exports
 var userSchema = mongoose.Schema({
+    id: mongoose.Schema.ObjectId,
     email: String,
     password: String,
     token: String,
     skills: {type: Array, "default": []},
-    name: String
+    name: String,
+    hackathons: [{type: mongoose.Schema.ObjectId, ref: 'Hackathon'}],
+    createdHackathons: [{type: mongoose.Schema.ObjectId, ref: 'Hackathon'}]
 });
 
 userSchema.methods.generateHash = function (password) {
@@ -20,7 +23,7 @@ userSchema.methods.validPassword = function (password) {
 };
 
 userSchema.methods.safeData = function () {
-    return {name: this.name, email: this.email, token: this.token, skills: this.skills}
+    return {id: this.id, name: this.name, email: this.email, token: this.token, skills: this.skills}
 };
 
 module.exports = mongoose.model('User', userSchema);

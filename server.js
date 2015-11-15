@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var config = require('./config');
 var UserController = require('./app/controllers/user-controller');
 var AuthController = require('./app/controllers/auth-controller');
+var HackathonController = require('./app/controllers/hackathon-controller');
 
 var port = process.env.PORT || 8080;
 mongoose.connect(config.database);
@@ -33,6 +34,7 @@ app.post('/authenticate', AuthController.authenticate);
 app.post('/signup', UserController.createUser);
 app.get('/me', AuthController.ensureAuthorized, UserController.getProfile);
 app.post('/user',AuthController.ensureAuthorized, UserController.updateUser);
+app.put('/hackathon',AuthController.ensureAuthorized, HackathonController.createHackathon);
 apiRoutes.get('/', function (req, res) {
     res.json({message: 'This is where the hackers are'});
 });
