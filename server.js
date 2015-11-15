@@ -36,8 +36,9 @@ app.put('/hackathon', AuthController.ensureAuthorized, HackathonController.creat
 app.get('/hackathon', AuthController.ensureAuthorized, HackathonController.allHackathons);
 app.get('/hackathon/:id', AuthController.ensureAuthorized, HackathonController.getHackathon);
 app.post('/add-participant', AuthController.ensureAuthorized, HackathonController.addParticipant);
-app.put('/team',AuthController.ensureAuthorized, TeamController.createTeam);
-app.post('/add-team-member',AuthController.ensureAuthorized, TeamController.joinTeam);
+app.put('/team', AuthController.ensureAuthorized, TeamController.createTeam);
+app.post('/add-team-member', AuthController.ensureAuthorized, TeamController.joinTeam);
+app.get('/team', AuthController.ensureAuthorized, TeamController.fetchAllTeams);
 apiRoutes.get('/', function (req, res) {
     res.json({message: 'This is where the hackers are'});
 });

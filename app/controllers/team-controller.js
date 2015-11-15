@@ -47,5 +47,19 @@ function joinTeam(req, res) {
     });
 }
 
+function allTeams(req, res) {
+    Team.find({}, function (err, teams) {
+        if (err) {
+            res.json({
+                type: false,
+                data: "Error occured while fetching all teams"
+            });
+        }
+        res.send(teams);
+    });
+}
+
+
 module.exports.createTeam = createTeam;
 module.exports.joinTeam = joinTeam;
+module.exports.fetchAllTeams = allTeams;
