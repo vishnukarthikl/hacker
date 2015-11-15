@@ -21,7 +21,8 @@ hackathonSchema.methods.data = function () {
         address: this.address,
         website: this.website,
         city: this.city,
-        state: this.state
+        state: this.state,
+        creator: this.creator
     };
 };
 

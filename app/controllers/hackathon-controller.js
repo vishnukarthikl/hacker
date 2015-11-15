@@ -9,17 +9,18 @@ function createHackathon(req, res) {
     hackathon.description = req.body.description;
     hackathon.address = req.body.address;
     hackathon.website = req.body.website;
-    hackathon.creator = mongoose.Types.ObjectId(req.body.creator);
     hackathon.city = req.body.city;
     hackathon.state = req.body.state;
-    hackathon.save(function (err, savedHackathon) {
-        User.findOne({id: mongoose.Types.ObjectId(hackathon.creator)}, function (err, creator) {
-            if (err) {
-                res.json({
-                    type: false,
-                    data: "Error occured while fetching user " + creator.id
-                })
-            } else {
+
+    User.findOne({token: req.token}, function (err, creator) {
+        if (err || creator == null) {
+            res.json({
+                type: false,
+                data: "Error occured while fetching user"
+            })
+        } else {
+            hackathon.creator = creator.id;
+            hackathon.save(function (err, savedHackathon) {
                 creator.createdHackathons.push(savedHackathon.id);
                 creator.save(function () {
                     res.json({
@@ -27,10 +28,10 @@ function createHackathon(req, res) {
                         data: savedHackathon.data()
                     });
                 });
-            }
-        });
-
+            });
+        }
     });
+
 }
 function allHackathons(req, res) {
     Hackathon.find({}, function (err, hackathons) {
