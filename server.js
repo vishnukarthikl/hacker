@@ -35,6 +35,7 @@ app.post('/signup', UserController.createUser);
 app.get('/me', AuthController.ensureAuthorized, UserController.getProfile);
 app.post('/user',AuthController.ensureAuthorized, UserController.updateUser);
 app.put('/hackathon',AuthController.ensureAuthorized, HackathonController.createHackathon);
+app.get('/hackathon',AuthController.ensureAuthorized, HackathonController.allHackathons);
 apiRoutes.get('/', function (req, res) {
     res.json({message: 'This is where the hackers are'});
 });

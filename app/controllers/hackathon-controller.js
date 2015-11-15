@@ -30,5 +30,17 @@ function createHackathon(req, res) {
 
     });
 }
+function allHackathons(req, res) {
+    Hackathon.find({}, function (err, hackathons) {
+        if (err) {
+            res.json({
+                type: false,
+                data: "Error occured while fetching all hackathon"
+            });
+        }
+        res.send(hackathons);
+    });
+}
 
 module.exports.createHackathon = createHackathon;
+module.exports.allHackathons = allHackathons;

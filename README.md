@@ -25,3 +25,8 @@ create hackathon
 ````
 curl -X PUT -H "Content-Type: application/json" -d '{"creator":"564841d1f84e8074875d3d55","name":"hacksc"}' http://localhost:8080/hackathon -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfX3YiOjAsIm5hbWUiOiJBQUEiLCJwYXNzd29yZCI6IiQyYSQwOCRKeUNha1JxNFhxYXJnY052M3o0TUIuOWFGNTRNMUJEcUg1SmtYSW84ZDRTMEhoZzcvZkNNLiIsImVtYWlsIjoiYWJjNyIsImlkIjoiNTY0ODQxZDFmODRlODA3NDg3NWQzZDU1IiwiX2lkIjoiNTY0ODQxZDFmODRlODA3NDg3NWQzZDU0IiwiaGFja2F0aG9ucyI6W10sInNraWxscyI6W119.eCfwyZdS5jafUX5p6MKfiU0p91-wj_zWUbQUU4G4SZk"
 ````
+all hackathons
+--------------
+````
+curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfX3YiOjAsIm5hbWUiOiJBQUEiLCJwYXNzd29yZCI6IiQyYSQwOCRKeUNha1JxNFhxYXJnY052M3o0TUIuOWFGNTRNMUJEcUg1SmtYSW84ZDRTMEhoZzcvZkNNLiIsImVtYWlsIjoiYWJjNyIsImlkIjoiNTY0ODQxZDFmODRlODA3NDg3NWQzZDU1IiwiX2lkIjoiNTY0ODQxZDFmODRlODA3NDg3NWQzZDU0IiwiaGFja2F0aG9ucyI6W10sInNraWxscyI6W119.eCfwyZdS5jafUX5p6MKfiU0p91-wj_zWUbQUU4G4SZk" http://localhost:8080/hackathon
+````
