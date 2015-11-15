@@ -10,6 +10,8 @@ function createHackathon(req, res) {
     hackathon.address = req.body.address;
     hackathon.website = req.body.website;
     hackathon.creator = mongoose.Types.ObjectId(req.body.creator);
+    hackathon.city = req.body.city;
+    hackathon.state = req.body.state;
     hackathon.save(function (err, savedHackathon) {
         User.findOne({id: mongoose.Types.ObjectId(hackathon.creator)}, function (err, creator) {
             if (err) {
