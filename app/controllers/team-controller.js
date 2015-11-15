@@ -59,7 +59,18 @@ function allTeams(req, res) {
     });
 }
 
+function getTeam(req, res) {
+    Team.findOne({id: mongoose.Types.ObjectId(req.params.id)}).populate('members').exec(function (err, team) {
+        res.json({
+            type: true,
+            data: team
+        });
+    });
+}
+
 
 module.exports.createTeam = createTeam;
 module.exports.joinTeam = joinTeam;
-module.exports.fetchAllTeams = allTeams;
+module.exports.allTeams = allTeams;
+module.exports.getTeam = getTeam;
+
