@@ -106,7 +106,7 @@ function ensureAuthorized(req, res, next) {
 
 app.get('/me', ensureAuthorized, function (req, res) {
     User.findOne({token: req.token}, function (err, user) {
-        if (err || !user) {
+        if (err || user == null) {
             res.json({
                 type: false,
                 data: "Error occurred: " + err
