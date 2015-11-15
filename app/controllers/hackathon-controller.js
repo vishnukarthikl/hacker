@@ -42,5 +42,30 @@ function allHackathons(req, res) {
     });
 }
 
+function addParticipant(req, res) {
+    Hackathon.findOne({id: mongoose.Types.ObjectId(req.body.hackathon_id)}, function (err, hackathon) {
+        if (err || hackathon == null) {
+            res.json({
+                type: false,
+                data: "Error occured while fetching hackathon "+hackathon.id
+            });
+        } else {
+            User.findOne({token: req.token}, function (err, participant) {
+                hackathon.participants.push(participant);
+                hackathon.save(function (err, savedHackathon) {
+                    participant.hackathons.push(savedHackathon.id);
+                    participant.save(function (err, savedParticipant) {
+                        res.json({
+                            type: true,
+                            data: {hackathon: savedHackathon.data(), participant: savedParticipant.safeData()}
+                        });
+                    });
+                });
+            });
+        }
+    });
+}
+
 module.exports.createHackathon = createHackathon;
 module.exports.allHackathons = allHackathons;
+module.exports.addParticipant = addParticipant;
