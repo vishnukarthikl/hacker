@@ -9,7 +9,9 @@ var AuthController = require('./app/controllers/auth-controller');
 var HackathonController = require('./app/controllers/hackathon-controller');
 
 var port = process.env.PORT || 8080;
-mongoose.connect(config.database);
+var mongodb = process.env.MONGOLAB_URI || config.database;
+
+mongoose.connect(mongodb);
 app.set('superSecret', config.secret);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
