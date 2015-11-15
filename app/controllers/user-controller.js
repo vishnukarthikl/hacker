@@ -39,6 +39,7 @@ function createUser(req, res) {
                 var userModel = new User();
                 userModel.email = req.body.email;
                 userModel.password = userModel.generateHash(req.body.password);
+                userModel.name = req.body.name;
                 userModel.save(function (err, user) {
                     user.token = jwt.sign(user, process.env.JWT_SECRET);
                     user.save(function (err, savedUser) {
@@ -65,7 +66,8 @@ function getProfile(req, res) {
 
 function updateUser(req, res) {
     processUser(req, res, function (user) {
-        user.skills = req.skills;
+        user.skills = req.body.skills;
+        user.name = req.body.name;
         user.save(function (err, savedUser) {
             res.json({
                 type: true,
