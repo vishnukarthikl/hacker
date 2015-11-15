@@ -32,6 +32,7 @@ console.log('Magic happens at http://localhost:' + port);
 app.post('/authenticate', AuthController.authenticate);
 app.post('/signup', UserController.createUser);
 app.get('/me', AuthController.ensureAuthorized, UserController.getProfile);
+app.post('/user',AuthController.ensureAuthorized, UserController.updateUser);
 apiRoutes.get('/', function (req, res) {
     res.json({message: 'This is where the hackers are'});
 });

@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var userSchema = mongoose.Schema({
     email: String,
     password: String,
-    token: String
+    token: String,
+    skills: Array
 });
 
 userSchema.methods.generateHash = function (password) {
@@ -18,7 +19,7 @@ userSchema.methods.validPassword = function (password) {
 };
 
 userSchema.methods.safeData = function () {
-    return {email: this.email, token: this.token}
+    return {email: this.email, token: this.token, skills: this.skills}
 };
 
 module.exports = mongoose.model('User', userSchema);

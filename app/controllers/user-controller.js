@@ -1,6 +1,25 @@
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 
+
+function processUser(req, res, requestProcessor) {
+    User.findOne({token: req.token}, function (err, user) {
+        if (err) {
+            res.json({
+                type: false,
+                data: "Error occurred: " + err
+            });
+        } else if (user == null) {
+            res.json({
+                type: false,
+                data: "invalid token"
+            });
+        } else {
+            requestProcessor(user);
+        }
+    });
+}
+
 function createUser(req, res) {
     User.findOne({
         email: req.body.email
@@ -36,20 +55,26 @@ function createUser(req, res) {
 }
 
 function getProfile(req, res) {
-    User.findOne({token: req.token}, function (err, user) {
-        if (err || user == null) {
-            res.json({
-                type: false,
-                data: "Error occurred: " + err
-            });
-        } else {
+    processUser(req, res, function (user) {
+        res.json({
+            type: true,
+            data: user.safeData()
+        })
+    })
+}
+
+function updateUser(req, res) {
+    processUser(req, res, function (user) {
+        user.skills = req.skills;
+        user.save(function (err, savedUser) {
             res.json({
                 type: true,
-                data: user.safeData()
+                data: savedUser.safeData()
             });
-        }
+        });
     });
 }
 
 module.exports.createUser = createUser;
 module.exports.getProfile = getProfile;
+module.exports.updateUser = updateUser;
